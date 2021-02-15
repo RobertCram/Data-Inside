@@ -1,0 +1,10 @@
+{
+    "cucumberautocomplete.steps": [
+        "features/step_definitions/*.rb",
+        "/var/lib/gems/2.5.0/gems/axe-matchers-2.6.1/lib/axe/cucumber/*.rb"
+    ],
+    "cucumberautocomplete.strictGherkinCompletion": false,
+    "editor.tabSize": 2,
+    "ruby.useLanguageServer": true,
+    "ruby.useBundler": true
+}
