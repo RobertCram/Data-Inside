@@ -5,10 +5,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Advent Of Code",
+      "name": "Playground",
       "type": "Ruby",
       "request": "launch",
-      "program": "${workspaceRoot}/day23/main.rb"
+      "program": "${workspaceRoot}/playground.rb"
     }
   ]
 }

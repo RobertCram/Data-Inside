@@ -1,0 +1,18 @@
+---
+
+development:
+  setting:                development_value
+  # The following will become 'secure_setting'
+  _secure_username: cfaZRUSwmrfCX01woYpYxGjUmuP1Z8dcQljlLVDNwKADJowMu+/DON2BgP6OWFEV43N2OtoHI2It4nguzO7tv7XCJYUFavQPGUiNUASEp3Aj3/2WXHt19luy72N+CA0n4/4jnpaA8v/xx9egFPGygsiHkl6YJMVkPgkoIpjwTLRNtDyGczn85hMcyxsZVKrMkS2gulXN0GDh83JIJR96BOCj+DMXNC3UNmZe+6wVhFMcnnPz6lwX4tlXRxq1crA8dHj4XF94AG4IAIjw1mx6pnOdvH7kdvpgbJwk9Eme1d9XB3VMyg3KRLm0dq2h2/aq+Dn5qJiWuoj7mRVKG3aOcw==
+  _secure_password: IL+LK45Noo+QoJx2imYytb3qY//hlFcUz6tMlNRkEqpkfI+3hdH2daw9ovYvVrYMWUmVaIF4oh/lI3SKkwz92ThxcZUsBKJ/Vb0hcRwk9cKvtwYcNgXr3ZdpP9EvtnS4rVnHIjzntrcjzeOQSGiBHDaS2zL8efBLa9Cbri2FhzW45wyux1Y2Y+Sh/MBTeGByKLu1NlOpiDhAFKob+jGd9upvRAvNWcyJe6fd8fJz+7iiyVbrzq39XNAfv+weLsepDpWN8tCMmOhx2LWbW/qwR3dPkzDH9eL9hJZmSgh+o+MBstBGo4GdfjZy76fLF4eSTdCgwL1+8eGMCue4yuPcpA==
+  _secure_host: jNtT9cLAX6eAIPPfO9VXL0PcOT1gn1/yQ/1YzixIda1ucuMNIXWBT8lJWZZ2ptKgh1ULNT3MtywKD7N7yGVU6KU/1qBZ4BKagwIkraa9+ak7osfBBPR/tmRmgRi++vlF0Yh90xkPR8sgopw1RMYNuE8ErLlG87Uw8T4mbgo/SKk/qfmnG6Wb72TEZNtKXRMP0cdLuAC71AhLJ7MRd3HLREUl5auWJ5b5mIIEWDNc24Kvu1Cb15+ngQoMommbl1WMyC2qaNuoXf1wl1k1jOf9VZV3kLnbSj9yc497KOPL82wz9veGPVrctinxY60ZzopxEjN+wlC6bJq5giK4/g59dg==
+
+test:
+  setting:                test_value
+  # The following will become 'secure_setting'
+  _secure_secure_setting: fALyJiqmJuadG182ZHVBHJ3BFQTmvwxS+qTQwO7xJo8Vn0IfilWlNcFPgD+3hhQ5RDWSu1ZI6s4eix7dIdWQV00mLdXru0hnoA1nTcnOciP0VotzVu9CsQyw8hSBceSoTKGMQ0bTaWwZIHfPwTC4C3x9arG3iGJcSunWqqBYU8itinHT1Rv09C9wAg7Kt/klZYgoC8nsXNnV7AOFWh7LJ0t58dH6WbIpyWYy6k1VpqcnrTxjIVS3533+DwYUiai/eVv9ss1wRLyo116ZUdKOxsoBoF5o/3id0QHDcno92I1wdMcR7AU4UWZP3aT+f3GTWB/dCoXKooUJDH5HXdTk8Q==
+
+production:
+  setting:                production_value
+  # The following will become 'secure_setting'
+  _secure_secure_setting: GO+x5xV6Pi4G+c8tziPCJ6NEvKUStbSH5P+9i0AOICwUBbB3KfFgZlsZ9KLHwVbBxA0EKLQYQTgBsJGBfRsVX8gMUbNP6SfVbb1SiFnur5rIxHXQ6D8YQmA+kxAj/d1D5ZNz9FlIyajjA3QXuyvmKIAyXRWSK3TcYu1uxLs/Q1+M19iZrTi7MX7l4GMHHeruCyZ5Xhvf98qaet9mUdSF/588NgtZtsRswz9/OzUxMXSPCXZcKnJceLNSv8U099pPQWpaL5MEHkuQuR/3iFuyx03lXvVrlnyYA79gEGxit//ffLRzCj6LvnHx8SvPZd67dOcBBfs0rWQTZ0vDpuumHQ==
