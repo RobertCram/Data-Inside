@@ -14,7 +14,8 @@
 		"castwide.solargraph",
 		"rebornix.ruby",
 		"eamodio.gitlens",
-		"octref.vetur"
+		"octref.vetur",
+		"ms-mssql.mssql"
 	],
 	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
