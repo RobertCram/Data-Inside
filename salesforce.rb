@@ -11,7 +11,8 @@ class Salesforce
     password: ENV['SF_PASSWORD'] || Chamber['development'][:sf_password],
     security_token: ENV['SF_SECURITY_TOKEN'] || Chamber['development'][:sf_security_token],
     client_id: ENV['SF_CLIENT_ID'] || Chamber['development'][:sf_client_id],
-    client_secret: ENV['SF_CLIENT_SECRET'] || Chamber['development'][:sf_client_secret]
+    client_secret: ENV['SF_CLIENT_SECRET'] || Chamber['development'][:sf_client_secret],
+    timeout: 120
   }.freeze
 
   def self.query(query)
