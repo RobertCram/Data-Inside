@@ -4,10 +4,26 @@
 class Uploader
   CUTOFF_DATE = '2018-02-17'
   SOQL_RECORD_LIMIT = 10_000_000
-  INSERTS_PER_CALL = 1000
+  INSERTS_PER_CALL = 1
 
-  def self.datetime_to_date(value)
-    value[0..9]
+  def self.escape(value)
+    !value.nil? && value.is_a?(String) ? value.gsub("\'", "\'\'") : value
+  end
+
+  def self.quotedstring(value)
+    "'#{escape(value)}'"
+  end
+
+  def self.datetime_to_date(value, _ = nil, _ = nil)
+    quotedstring(value[0..9])
+  end
+
+  def self.number_to_string(value, _ = nil, _ = nil)
+    quotedstring(value.to_s)
+  end
+
+  def self.integer_to_string(value, _ = nil, _ = nil)
+    quotedstring(value.to_i.to_s)
   end
 
   def initialize(salesforce, sqlserver, upload_info)
@@ -16,6 +32,9 @@ class Uploader
     @salesforce = salesforce
     @sqlserver = sqlserver
     @info = upload_info
+    @mapping = @info[:mapping].transform_keys(&:downcase).transform_values(&:downcase)
+    @converters = @info[:converters].transform_keys(&:downcase)
+    @soqlfields = @mapping.values + @info[:soql_additional_fields].map(&:downcase)
   end
 
   def execute
@@ -37,8 +56,8 @@ class Uploader
   end
 
   def selectdata
-    soqlfields = @info[:mapping].values.join(',')
-    query = "SELECT #{soqlfields} FROM #{@info[:sf_tablename]} WHERE #{@info[:predicate]}"
+    soqlstring = @soqlfields.join(',')
+    query = "SELECT #{soqlstring} FROM #{@info[:sf_tablename]} WHERE #{@info[:predicate]}"
     data = @salesforce.query(query)
     @selected = data.length
     data
@@ -47,48 +66,45 @@ class Uploader
     nil
   end
 
-  def insertdata_old(data)
-    data.each_slice(INSERTS_PER_CALL) do |records|
-      soqlfields = @info[:mapping].values
-      values = records.map { |record| "(#{soqlfields.map { |field| "'#{get(record, field)}'" }.join(',')})" }
-      values = convert(values).join(",\n")
-      sql = getsql(values)
-      executesql(sql)
-    end
-  end
-
   def insertdata(data)
     data.each_slice(INSERTS_PER_CALL) do |records|
-      soqlfields = @info[:mapping].values
-      value_arrays = records.map { |record| soqlfields.map { |field| get(record, field) } }
-      value_arrays = value_arrays.map { |value_array| convert(value_array) }
-      value_strings = value_arrays.map { |value_array| "(#{value_array.map { |value| "'#{value}'" }.join(',')})" }
-      values = value_strings.join(",\n")
-      sql = getsql(values)
+      soqlvalues = records.map { |record| record_to_soql_values(record) }
+      sqlvalues = soqlvalues_to_sqlvalues(soqlvalues)
+      sql = getsql(sqlvalues.join(",\n"))
+      puts sql
       executesql(sql)
     end
   end
 
-  def convert(values)
-    c = @info[:converters]
-    return values if c.nil?
-
-    m = @info[:mapping]
-    values.each_with_index.map { |value, i| c.key?(m.keys[i]) ? c[m.keys[i]].call(value) : value }
+  def record_to_soql_values(record)
+    @soqlfields.map { |field| Hash[field, getsoqlvalue(record, field)] }.inject(:merge)
   end
 
-  def get(record, field)
+  def soqlvalues_to_sqlvalues(soqlvalues)
+    soqlvalues.map do |values|
+      "(#{@mapping.map { |sql, soql| getsqlvalue(values, sql, soql) }.join(',')})"
+    end
+  end
+
+  def getsoqlvalue(record, field)
     return nil if record.nil?
 
-    return record.attrs[field] unless field.include? '.'
+    return record.attrs.transform_keys(&:downcase)[field] unless field.include? '.'
 
     p = field.index '.'
-    puts record.inspect if record[field[0..p - 1]].nil?
-    get(record[field[0..p - 1]], field[p + 1..])
+    getsoqlvalue(record.transform_keys(&:downcase)[field[0..p - 1]], field[p + 1..])
+  end
+
+  def getsqlvalue(soqlvalues, sqlfield, soqlfield)
+    value = soqlvalues[soqlfield]
+    c = @converters
+    return self.class.quotedstring(value) if c.nil? || !c.include?(sqlfield)
+
+    c[sqlfield].call(value, soqlvalues, sqlfield)
   end
 
   def getsql(values)
-    sqlfields = @info[:mapping].keys.join(',')
+    sqlfields = @mapping.keys.join(',')
     <<~SQL
       INSERT INTO #{@info[:sql_tablename]}
       (#{sqlfields})

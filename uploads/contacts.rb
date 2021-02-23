@@ -6,7 +6,9 @@ CONTACT_INFO = {
 
   sf_tablename: 'Contact',
 
-  predicate: "AccountId != null AND (CALC_Einddatum_Alle_Giften__c >= #{Uploader::CUTOFF_DATE} OR CreatedDate >= #{Uploader::CUTOFF_DATE}T00:00:00Z) LIMIT #{Uploader::SOQL_RECORD_LIMIT}",
+  predicate: <<~SOQL,
+    AccountId != null AND (CALC_Einddatum_Alle_Giften__c >= #{Uploader::CUTOFF_DATE} OR CreatedDate >= #{Uploader::CUTOFF_DATE}T00:00:00Z) LIMIT #{Uploader::SOQL_RECORD_LIMIT}
+  SOQL
 
   sql_tablename: 'ImportSfContact',
 
@@ -14,16 +16,16 @@ CONTACT_INFO = {
     Accountid: 'AccountId',
     Birthdate: 'Birthdate',
     Createddate: 'CreatedDate',
-    # SocoStartDate:
+    # SocoStartDate: ?
     Donotcall: 'DoNotCall',
     Hasoptedoutofemail: 'HasOptedOutofEMail',
     Id: 'Id',
-    # NoDirectMailC:
-    # NoEMailsC:
+    # NoDirectMailC: ?
+    # NoEMailsC: ?
     NoPostalMailC: 'Geen_Magazine__c',
     SocoActiveC: 'soco__Active__c',
-    # SocoAgeC:
-    # SocoEndDateC:
+    # SocoAgeC: ? - geboortedatum wordt al meegestuurd
+    # SocoEndDateC: ?
     SocoSexeC: 'soco__n_Gender__c',
     SocoOriginatingCampaignC: 'soco__Originating_Campaign__c',
     SocoStatusC: 'soco__Status__c',

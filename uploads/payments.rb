@@ -4,7 +4,9 @@ PAYMENT_INFO = {
 
   sf_tablename: 'soco__Payment__c',
 
-  predicate: "FW__c = true AND soco__Collection_Date__c >= #{Uploader::CUTOFF_DATE} LIMIT #{Uploader::SOQL_RECORD_LIMIT}",
+  predicate: <<~SOQL,
+    FW__c = true AND soco__Collection_Date__c >= #{Uploader::CUTOFF_DATE} LIMIT #{Uploader::SOQL_RECORD_LIMIT}
+  SOQL
 
   sql_tablename: 'ImportSfPayment',
 
