@@ -28,13 +28,13 @@ CAMPAIGN_INFO = {
 
   sf_tablename: 'Campaign',
 
-  # predicate: <<~SOQL,
-  #   Id != Null LIMIT #{Uploader::SOQL_RECORD_LIMIT}
-  # SOQL
-
   predicate: <<~SOQL,
-    Id IN ('7010Q000000cuOPQAY', '7011p0000011oc5AAA', '7011p0000011od8AAA') LIMIT #{Uploader::SOQL_RECORD_LIMIT}
+    Id != Null LIMIT #{Uploader::SOQL_RECORD_LIMIT}
   SOQL
+
+  # predicate: <<~SOQL,
+  #   Id IN ('7010Q000000cuOPQAY', '7011p0000011oc5AAA', '7011p0000011od8AAA') LIMIT #{Uploader::SOQL_RECORD_LIMIT}
+  # SOQL
 
   sql_tablename: 'ImportSfCampaign',
 

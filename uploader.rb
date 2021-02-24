@@ -3,8 +3,8 @@
 # Base class to handle uploads
 class Uploader
   CUTOFF_DATE = '2018-02-17'
-  SOQL_RECORD_LIMIT = 10_000_000
-  INSERTS_PER_CALL = 1
+  SOQL_RECORD_LIMIT = 10_000
+  INSERTS_PER_CALL = 1000
 
   def self.escape(value)
     !value.nil? && value.is_a?(String) ? value.gsub("\'", "\'\'") : value
@@ -33,8 +33,9 @@ class Uploader
     @sqlserver = sqlserver
     @info = upload_info
     @mapping = @info[:mapping].transform_keys(&:downcase).transform_values(&:downcase)
-    @converters = @info[:converters].transform_keys(&:downcase)
-    @soqlfields = @mapping.values + @info[:soql_additional_fields].map(&:downcase)
+    @converters = @info[:converters].transform_keys(&:downcase) unless @info[:converters].nil?
+    @soqlfields = @mapping.values
+    @soqlfields += @info[:soql_additional_fields].map(&:downcase) unless @info[:soql_additional_fields].nil?
   end
 
   def execute

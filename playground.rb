@@ -33,9 +33,9 @@ end
 uploads = [
   # PAYMENT_INFO,
   # CONTACT_INFO,
-  CAMPAIGN_INFO,
+  # CAMPAIGN_INFO,
   # CAMPAIGNMEMBER_INFO,
-  # AGREEMENT_INFO
+  AGREEMENT_INFO
 ]
 
 elapsed = Benchmark.measure do
