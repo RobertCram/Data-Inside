@@ -24,9 +24,9 @@ CAMPAIGNMEMBER_INFO = {
     ContactId: 'ContactId',
     CampaignId: 'CampaignId',
     # socoPaymentReferencec: ? houden we niet bij, maar wel frequentie en bedrag
-    # ? : Gift_frequentie__c
-    # ? : Bedrag__c
-    # ? : Status
+    Gift_Frequentie: 'Gift_frequentie__c',
+    BedragC: 'Bedrag__c',
+    Status: 'Status',
     DatumC: 'Datum__c',
     Incentive: 'Campaign.Gevraagd_bedrag__c', # staat al bij campagne
     CampaignName: 'Campaign.Name', # staat al bij campagne
@@ -37,7 +37,7 @@ CAMPAIGNMEMBER_INFO = {
 
   converters: {
     DatumC: method(:datumc),
-    Parentname: method(:parentname)
+    CampaignName: method(:parentname)
   },
 
   soql_additional_fields: [

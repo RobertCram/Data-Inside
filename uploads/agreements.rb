@@ -4,7 +4,7 @@ AGREEMENT_INFO = {
 
   sf_tablename: 'soco__Agreement__c',
 
-  predicate: "Id != null LIMIT #{Uploader::SOQL_RECORD_LIMIT}",
+  predicate: "(soco__End_Date__c = null OR soco__End_Date__c >= #{Uploader::CUTOFF_DATE}) LIMIT #{Uploader::SOQL_RECORD_LIMIT}",
 
   sql_tablename: 'ImportSfAgreement',
 
@@ -12,7 +12,7 @@ AGREEMENT_INFO = {
     # AgreementMigrationIDc: ?
     Id: 'Id',
     Name: 'Name',
-    DonationContractc: 'Donatie_Contract__c', # wordt niet gebruikt
+    # DonationContractc: ? # wordt niet gebruikt
     # socoAccountc: ? # wordt niet gebruikt
     socoAmountc: 'soco__Amount__c',
     socoContactc: 'soco__Contact__c',

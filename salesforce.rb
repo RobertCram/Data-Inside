@@ -12,7 +12,7 @@ class Salesforce
     security_token: ENV['SF_SECURITY_TOKEN'] || Chamber['development'][:sf_security_token],
     client_id: ENV['SF_CLIENT_ID'] || Chamber['development'][:sf_client_id],
     client_secret: ENV['SF_CLIENT_SECRET'] || Chamber['development'][:sf_client_secret],
-    timeout: 120
+    timeout: 300
   }.freeze
 
   def self.query(query)

@@ -2,8 +2,8 @@
 
 # Base class to handle uploads
 class Uploader
-  CUTOFF_DATE = '2018-02-17'
-  SOQL_RECORD_LIMIT = 10_000
+  CUTOFF_DATE = '2016-01-01'
+  SOQL_RECORD_LIMIT = 10_000_000
   INSERTS_PER_CALL = 1000
 
   def self.escape(value)
@@ -72,7 +72,7 @@ class Uploader
       soqlvalues = records.map { |record| record_to_soql_values(record) }
       sqlvalues = soqlvalues_to_sqlvalues(soqlvalues)
       sql = getsql(sqlvalues.join(",\n"))
-      puts sql
+      # puts sql
       executesql(sql)
     end
   end

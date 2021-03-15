@@ -32,8 +32,8 @@ CONTACT_INFO = {
     NoAcceptgiro: 'Geen_Acceptgiro__c',
     socoBillingZipCode: 'Account.soco__Billing_Zipcode__c',
     socoBillingHousenumber: 'Account.soco__Billing_Housenumber__c',
-    socoBillingSuffix: 'Account.soco__Billing_Suffix__c'
-    # ?: 'Account.Type'
+    socoBillingSuffix: 'Account.soco__Billing_Suffix__c',
+    AccountType: 'Account.Type'
   },
 
   converters: {

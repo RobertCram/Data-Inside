@@ -32,16 +32,12 @@ CAMPAIGN_INFO = {
     Id != Null LIMIT #{Uploader::SOQL_RECORD_LIMIT}
   SOQL
 
-  # predicate: <<~SOQL,
-  #   Id IN ('7010Q000000cuOPQAY', '7011p0000011oc5AAA', '7011p0000011od8AAA') LIMIT #{Uploader::SOQL_RECORD_LIMIT}
-  # SOQL
-
   sql_tablename: 'ImportSfCampaign',
 
   mapping: {
     Versie: 'Uiting__c',
     VersieId: 'Id',
-    IsActive: 'IsActive', # wordt volgens mij niet gebruikt
+    # IsActive: 'IsActive',  wordt niet gebruikt
     EndDate: 'EndDate',
     StartDate: 'StartDate',
     CampagneKanaal: 'Campagnekanaal__c',
@@ -52,8 +48,8 @@ CAMPAIGN_INFO = {
     TargetC: 'ExpectedRevenue', # nog niet ingevuld
     Incentive: 'Gevraagd_bedrag__c', # nog niet ingevuld
     Volgnummer: 'Identificatie_nummer__c', # nog niet ingevuld
-    Parentname: 'Name'
-    # ?: 'soco__Destination__c'
+    Parentname: 'Name',
+    SocoDestinationC: 'soco__Destination__r.Type__c'
   },
 
   converters: {
