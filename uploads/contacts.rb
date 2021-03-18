@@ -7,7 +7,7 @@ CONTACT_INFO = {
   sf_tablename: 'Contact',
 
   predicate: <<~SOQL,
-    AccountId != null AND (CALC_Einddatum_Alle_Giften__c >= #{Uploader::CUTOFF_DATE} OR CreatedDate >= #{Uploader::CUTOFF_DATE}T00:00:00Z) LIMIT #{Uploader::SOQL_RECORD_LIMIT}
+    AccountId != null LIMIT #{Uploader::SOQL_RECORD_LIMIT}
   SOQL
 
   sql_tablename: 'ImportSfContact',
