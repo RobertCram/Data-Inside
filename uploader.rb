@@ -2,7 +2,7 @@
 
 # Base class to handle uploads
 class Uploader
-  CUTOFF_DATE = '2016-01-01'
+  CUTOFF_DATE = (Date.today - 182).strftime('%Y-%m-%d')
   SOQL_RECORD_LIMIT = 10_000_000
   INSERTS_PER_CALL = 1000
 
