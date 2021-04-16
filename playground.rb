@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-require 'benchmark'
+ENV['CHAMBER_KEY'] = ENV['CHAMBER_KEY'].gsub '_', "\n" if ENV.key? 'CHAMBER_KEY'
 
+require 'benchmark'
 require 'chamber'
 require 'tiny_tds'
 require './salesforce'
@@ -30,16 +31,20 @@ def upload(upload_info)
   puts "[#{upload_info[:sql_tablename]}] Verstreken tijd: #{seconds_to_hms(elapsed.real.to_i)}\n\n"
 end
 
-uploads = [
-  PAYMENT_INFO,
-  CONTACT_INFO,
-  CAMPAIGN_INFO,
-  CAMPAIGNMEMBER_INFO,
-  AGREEMENT_INFO
-]
+def execute
+  uploads = [
+    # PAYMENT_INFO,
+    # CONTACT_INFO,
+    # CAMPAIGN_INFO,
+    # CAMPAIGNMEMBER_INFO,
+    # AGREEMENT_INFO
+  ]
 
-elapsed = Benchmark.measure do
-  uploads.each { |info| upload info }
+  elapsed = Benchmark.measure do
+    uploads.each { |info| upload info }
+  end
+
+  puts "Totaal verstreken tijd: #{seconds_to_hms(elapsed.real.to_i)}\n\n"
 end
 
-puts "Totaal verstreken tijd: #{seconds_to_hms(elapsed.real.to_i)}\n\n"
+execute
