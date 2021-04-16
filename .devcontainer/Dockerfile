@@ -22,9 +22,15 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 RUN apt-get install -y freetds-dev 
 
-RUN gem install bundler solargraph ruby-debug-ide
+RUN gem install solargraph ruby-debug-ide
+
+RUN gem install bundler:2.2.10
 
 RUN mkdir /workspaces && cd /workspaces && git clone --branch production https://RobertCram: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@github.com/RobertCram/Data-Inside.git DataInside
+
+WORKDIR /workspaces/DataInside
+
+RUN bundle install
 
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog
