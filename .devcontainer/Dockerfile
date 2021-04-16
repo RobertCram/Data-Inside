@@ -24,7 +24,7 @@ RUN apt-get install -y freetds-dev
 
 RUN gem install bundler solargraph ruby-debug-ide
 
-RUN mkdir /workspaces && cd /workspaces && git clone https://RobertCram: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@github.com/RobertCram/Data-Inside.git DataInside
+RUN mkdir /workspaces && cd /workspaces && git clone --branch production https://RobertCram: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@github.com/RobertCram/Data-Inside.git DataInside
 
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=dialog
