@@ -13,6 +13,14 @@ require './uploads/campaigns'
 require './uploads/campaignmembers'
 require './uploads/agreements'
 
+UPLOADS = [
+  PAYMENT_INFO,
+  CONTACT_INFO,
+  CAMPAIGN_INFO,
+  CAMPAIGNMEMBER_INFO,
+  AGREEMENT_INFO
+].freeze
+
 def seconds_to_hms(sec)
   [sec / 3600, sec / 60 % 60, sec % 60].map { |t| t.to_s.rjust(2, '0') }.join(':')
 end
@@ -32,19 +40,9 @@ def upload(upload_info)
 end
 
 def execute
-  uploads = [
-    # PAYMENT_INFO,
-    # CONTACT_INFO,
-    # CAMPAIGN_INFO,
-    # CAMPAIGNMEMBER_INFO,
-    # AGREEMENT_INFO
-  ]
-
   elapsed = Benchmark.measure do
-    uploads.each { |info| upload info }
+    UPLOADS.each { |info| upload info }
   end
 
   puts "Totaal verstreken tijd: #{seconds_to_hms(elapsed.real.to_i)}\n\n"
 end
-
-execute
