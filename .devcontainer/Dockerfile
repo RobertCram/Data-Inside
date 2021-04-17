@@ -11,7 +11,7 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-    # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
+# Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
     # [Optional] Add sudo support for the non-root user
@@ -26,6 +26,10 @@ RUN gem install solargraph ruby-debug-ide
 
 RUN gem install bundler:2.2.10
 
+# Invalidates the cache
+ADD https://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:x-oauth-basic@api.github.com/repos/RobertCram/Data-Inside/git/refs/heads/production version.json
+
+# Clones latest version of the production branch
 RUN mkdir /workspaces && cd /workspaces && git clone --branch production https://RobertCram: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@github.com/RobertCram/Data-Inside.git DataInside
 
 WORKDIR /workspaces/DataInside
