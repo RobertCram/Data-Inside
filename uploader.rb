@@ -39,7 +39,7 @@ class Uploader
   end
 
   def execute
-    cleartable
+    cleartable @info[:sql_tablename]
     puts "[#{@info[:sql_tablename]}] Getting data..."
     data = selectdata
     return if data.nil?
@@ -51,8 +51,8 @@ class Uploader
 
   private
 
-  def cleartable
-    result = @sqlserver.execute("TRUNCATE TABLE #{@info[:sql_tablename]}")
+  def cleartable(tablename)
+    result = @sqlserver.execute("TRUNCATE TABLE #{tablename}")
     result.do
   end
 

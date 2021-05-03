@@ -40,9 +40,12 @@ def upload(upload_info)
 end
 
 def execute
+  puts "Upload gestart: #{Time.now.getlocal('+02:00').strftime('%d-%m-%Y %H:%M')}"
+
   elapsed = Benchmark.measure do
     UPLOADS.each { |info| upload info }
   end
 
+  puts "Upload beëindigd: #{Time.now.getlocal('+02:00').strftime('%d-%m-%Y %H:%M')}"
   puts "Totaal verstreken tijd: #{seconds_to_hms(elapsed.real.to_i)}\n\n"
 end
