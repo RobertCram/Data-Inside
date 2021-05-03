@@ -33,7 +33,8 @@ CONTACT_INFO = {
     socoBillingZipCode: 'Account.soco__Billing_Zipcode__c',
     socoBillingHousenumber: 'Account.soco__Billing_Housenumber__c',
     socoBillingSuffix: 'Account.soco__Billing_Suffix__c',
-    AccountType: 'Account.Type'
+    AccountType: 'Account.Type',
+    Contactnummer: 'Contact_nummer__c'
   },
 
   converters: {

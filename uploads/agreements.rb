@@ -4,7 +4,9 @@ AGREEMENT_INFO = {
 
   sf_tablename: 'soco__Agreement__c',
 
-  predicate: "(soco__End_Date__c = null OR soco__End_Date__c >= #{Uploader::CUTOFF_DATE}) LIMIT #{Uploader::SOQL_RECORD_LIMIT}",
+  predicate: <<~SOQL,
+    (soco__End_Date__c = null OR soco__End_Date__c >= #{Uploader::CUTOFF_DATE}) LIMIT #{Uploader::SOQL_RECORD_LIMIT}
+  SOQL
 
   sql_tablename: 'ImportSfAgreement',
 
@@ -29,7 +31,9 @@ AGREEMENT_INFO = {
     OpzegredenC: 'Redenen_beeindiging__c',
     # IsAkte: ? # Donatie_Contract
     socoDestinationC: 'soco__Destination_lookup__r.Type__c',
-    LeverancierC: 'soco__originating_Campaign__r.Leverancier__c'
+    LeverancierC: 'soco__originating_Campaign__r.Leverancier__c',
+    Werverscode: 'Werver_Id__c',
+    Nagebeld: 'Nagebeld__c'
   }
 
 }.freeze
