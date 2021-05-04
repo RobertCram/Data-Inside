@@ -3,6 +3,7 @@
 # Base class to handle uploads
 class Uploader
   CUTOFF_DATE = (Date.today - 182).strftime('%Y-%m-%d')
+  # CUTOFF_DATE = '2016-01-01'
   SOQL_RECORD_LIMIT = 10_000_000
   INSERTS_PER_CALL = 1000
 
@@ -39,7 +40,7 @@ class Uploader
   end
 
   def execute
-    cleartable @info[:sql_tablename]
+    @sqlserver.cleartable @info[:sql_tablename]
     puts "[#{@info[:sql_tablename]}] Getting data..."
     data = selectdata
     return if data.nil?
@@ -50,11 +51,6 @@ class Uploader
   end
 
   private
-
-  def cleartable(tablename)
-    result = @sqlserver.execute("TRUNCATE TABLE #{tablename}")
-    result.do
-  end
 
   def selectdata
     soqlstring = @soqlfields.join(',')

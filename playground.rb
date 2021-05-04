@@ -5,7 +5,9 @@ ENV['CHAMBER_KEY'] = ENV['CHAMBER_KEY'].gsub '_', "\n" if ENV.key? 'CHAMBER_KEY'
 require 'benchmark'
 require 'chamber'
 require 'tiny_tds'
+require './mailer'
 require './salesforce'
+require './sqlserver'
 require './uploader'
 require './uploads/payments'
 require './uploads/contacts'
@@ -21,15 +23,18 @@ UPLOADS = [
   AGREEMENT_INFO
 ].freeze
 
+SQL_LOGIN_INFO = {
+  host: ENV['SQL_HOST'] || Chamber['development'][:sql_host],
+  username: ENV['SQL_USERNAME'] || Chamber['development'][:sql_username],
+  password: ENV['SQL_PASSWORD'] || Chamber['development'][:sql_password]
+}.freeze
+
 def seconds_to_hms(sec)
   [sec / 3600, sec / 60 % 60, sec % 60].map { |t| t.to_s.rjust(2, '0') }.join(':')
 end
 
-def upload(upload_info)
+def upload(sqlserver, upload_info)
   salesforce = Salesforce.create_client
-
-  settings = Chamber['development']
-  sqlserver = TinyTds::Client.new username: settings[:username], password: settings[:password], host: settings[:host]
 
   elapsed = Benchmark.measure do
     uploader = Uploader.new(salesforce, sqlserver, upload_info)
@@ -39,13 +44,27 @@ def upload(upload_info)
   puts "[#{upload_info[:sql_tablename]}] Verstreken tijd: #{seconds_to_hms(elapsed.real.to_i)}\n\n"
 end
 
+def cleanup(sqlserver, exception)
+  to = 'robert.cram@gmail.com'
+  subject = "[DI Server] #{exception}"
+  body = "Het uploaden van de gegevens is mislukt.\n\n#{exception.inspect}"
+  Mailer.sendmail(to, subject, body)
+  sqlserver.cleartables(UPLOADS.map(&:sql_tablename))
+end
+
+def timestr
+  Time.now.getlocal('+02:00').strftime('%d-%m-%Y %H:%M')
+end
+
 def execute
-  puts "Upload gestart: #{Time.now.getlocal('+02:00').strftime('%d-%m-%Y %H:%M')}"
+  puts "Upload gestart: #{timestr}"
+  sqlserver = SQLServer.new(SQL_LOGIN_INFO)
 
-  elapsed = Benchmark.measure do
-    UPLOADS.each { |info| upload info }
-  end
+  elapsed = Benchmark.measure { UPLOADS.each { |info| upload sqlserver, info } }
 
-  puts "Upload beëindigd: #{Time.now.getlocal('+02:00').strftime('%d-%m-%Y %H:%M')}"
+  puts "Upload beëindigd: #{timestr}"
   puts "Totaal verstreken tijd: #{seconds_to_hms(elapsed.real.to_i)}\n\n"
+rescue StandardError => e
+  cleanup(sqlserver, e)
+  puts "Upoad beëindigd met fouten: #{timestr}\n\n#{e.inspect}\n\n"
 end
