@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 ruby '2.6.6'
 
 gem 'chamber'
+gem 'mail'
 gem 'restforce'
 gem 'rufus-scheduler'
 gem 'tiny_tds'

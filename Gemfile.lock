@@ -28,6 +28,9 @@ GEM
       rexml
     kramdown-parser-gfm (1.1.0)
       kramdown (~> 2.0)
+    mail (2.7.1)
+      mini_mime (>= 0.1.1)
+    mini_mime (1.1.0)
     multipart-post (2.1.1)
     nokogiri (1.11.1-x86_64-linux)
       racc (~> 1.4)
@@ -88,6 +91,7 @@ PLATFORMS
 
 DEPENDENCIES
   chamber
+  mail
   restforce
   rufus-scheduler
   solargraph
