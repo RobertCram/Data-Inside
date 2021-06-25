@@ -41,6 +41,7 @@ CAMPAIGN_INFO = {
     EndDate: 'EndDate',
     StartDate: 'StartDate',
     CampagneKanaal: 'Campagnekanaal__c',
+    CampagneDoel: 'Campagnedoel__c',
     # socoNumberofPaymentsc:
     # socoAmountOfPaymentsc:
     ParentId: 'ParentId',

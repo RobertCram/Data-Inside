@@ -5,7 +5,7 @@ AGREEMENT_INFO = {
   sf_tablename: 'soco__Agreement__c',
 
   predicate: <<~SOQL,
-    (soco__End_Date__c = null OR soco__End_Date__c >= #{Uploader::CUTOFF_DATE}) LIMIT #{Uploader::SOQL_RECORD_LIMIT}
+    (soco__End_Date__c = null OR soco__End_Date__c >= #{Uploader::START_DATE}) LIMIT #{Uploader::SOQL_RECORD_LIMIT}
   SOQL
 
   sql_tablename: 'ImportSfAgreement',

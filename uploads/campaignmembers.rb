@@ -14,7 +14,7 @@ CAMPAIGNMEMBER_INFO = {
 
   sf_tablename: 'CampaignMember',
 
-  predicate: "CreatedDate >= #{Uploader::CUTOFF_DATE}T00:00:00Z LIMIT #{Uploader::SOQL_RECORD_LIMIT}",
+  predicate: "LastModifiedDate >= #{Uploader::CUTOFF_DATE}T00:00:00Z LIMIT #{Uploader::SOQL_RECORD_LIMIT}",
 
   sql_tablename: 'ImportSfCampaignmember',
 
