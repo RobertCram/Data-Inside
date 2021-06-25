@@ -7,6 +7,7 @@ gem 'chamber'
 gem 'mail'
 gem 'restforce'
 gem 'rufus-scheduler'
+gem 'sinatra'
 gem 'tiny_tds'
 
 group :development, :test do

@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-ENV['CHAMBER_KEY'] = ENV['CHAMBER_KEY'].gsub '_', "\n" if ENV.key? 'CHAMBER_KEY'
-
 require 'benchmark'
-require 'chamber'
 require 'tiny_tds'
 require './mailer'
 require './salesforce'
@@ -45,11 +42,13 @@ def upload(sqlserver, upload_info)
 end
 
 def cleanup(sqlserver, exception)
+  $info[:stopped] = timestr
+  $info[:error] = exception.message
   to = 'robert.cram@gmail.com'
   subject = "[DI Server] #{exception}"
   body = "Het uploaden van de gegevens is mislukt.\n\n#{exception.inspect}"
   Mailer.sendmail(to, subject, body)
-  sqlserver.cleartables(UPLOADS.map(&:sql_tablename))
+  sqlserver.cleartables(UPLOADS.map { |info| info[:sql_tablename] })
 end
 
 def timestr
@@ -57,13 +56,16 @@ def timestr
 end
 
 def execute
-  puts "Upload gestart: #{timestr}"
-  sqlserver = SQLServer.new(SQL_LOGIN_INFO)
+  started = timestr
+  $info = { started: started, stopped: '', error: '' }
+  puts "Upload gestart: #{started}"
 
+  sqlserver = SQLServer.new(SQL_LOGIN_INFO)
   elapsed = Benchmark.measure { UPLOADS.each { |info| upload sqlserver, info } }
 
-  puts "Upload beëindigd: #{timestr}"
-  puts "Totaal verstreken tijd: #{seconds_to_hms(elapsed.real.to_i)}\n\n"
+  stopped = timestr
+  $info[:stopped] = stopped
+  puts "Upload beëindigd: #{stopped}\nTotaal verstreken tijd: #{seconds_to_hms(elapsed.real.to_i)}\n\n"
 rescue StandardError => e
   cleanup(sqlserver, e)
   puts "Upoad beëindigd met fouten: #{timestr}\n\n#{e.inspect}\n\n"

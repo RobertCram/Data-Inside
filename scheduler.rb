@@ -9,4 +9,4 @@ scheduler.cron '0 20 * * *' do # uses UCT - starts at 22:00 local time
   execute
 end
 
-scheduler.join
+# scheduler.join

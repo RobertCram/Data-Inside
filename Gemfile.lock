@@ -32,6 +32,8 @@ GEM
       mini_mime (>= 0.1.1)
     mini_mime (1.1.0)
     multipart-post (2.1.1)
+    mustermann (1.1.1)
+      ruby2_keywords (~> 0.0.1)
     nokogiri (1.11.1-x86_64-linux)
       racc (~> 1.4)
     parallel (1.20.1)
@@ -39,6 +41,9 @@ GEM
       ast (~> 2.4.1)
     raabro (1.4.0)
     racc (1.5.2)
+    rack (2.2.3)
+    rack-protection (2.1.0)
+      rack
     rainbow (3.0.0)
     regexp_parser (2.1.1)
     restforce (5.0.4)
@@ -64,6 +69,11 @@ GEM
     ruby2_keywords (0.0.4)
     rufus-scheduler (3.7.0)
       fugit (~> 1.1, >= 1.1.6)
+    sinatra (2.1.0)
+      mustermann (~> 1.0)
+      rack (~> 2.2)
+      rack-protection (= 2.1.0)
+      tilt (~> 2.0)
     solargraph (0.40.4)
       backport (~> 1.1)
       benchmark
@@ -94,6 +104,7 @@ DEPENDENCIES
   mail
   restforce
   rufus-scheduler
+  sinatra
   solargraph
   tiny_tds
 
