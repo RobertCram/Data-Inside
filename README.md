@@ -32,7 +32,7 @@ docker save -o <filename> <imagename>
 ## Starting the Image on a Linux machine
 Create a docker environment file with only one value: CHAMBER_KEY=&lt;private chamber key&gt; and call it .chamber_env.pem
 
-``bash
- docker run -it --name datainsideserver --restart on-failure --env-file .chamber_env.pem robertcram/axon-software:dip2 bash -c "rackup -p80"
+```bash
+ docker run --name datainsideserver --restart on-failure --env-file .chamber_env.pem -p 8080:8080 robertcram/axon-software:dip4 bash -c "RACK_ENV=prodcution rackup -o0.0.0.0 -p8080"
  ```
 
