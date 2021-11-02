@@ -34,7 +34,8 @@ CONTACT_INFO = {
     socoBillingHousenumber: 'Account.soco__Billing_Housenumber__c',
     socoBillingSuffix: 'Account.soco__Billing_Suffix__c',
     AccountType: 'Account.Type',
-    Contactnummer: 'Contact_nummer__c'
+    Contactnummer: 'Contact_nummer__c',
+    NalatenC: 'Nalaten__c'
   },
 
   converters: {
