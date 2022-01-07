@@ -35,7 +35,13 @@ CONTACT_INFO = {
     socoBillingSuffix: 'Account.soco__Billing_Suffix__c',
     AccountType: 'Account.Type',
     Contactnummer: 'Contact_nummer__c',
-    NalatenC: 'Nalaten__c'
+    NalatenC: 'Nalaten__c',
+    EenKeerPerJaarAcceptgiroC: 'X1_keer_per_jaar_acceptgiro__c',
+    PersoonlijkeBenaderingMajorDonorC: 'Persoonlijke_benadering_Major_Donor__c',
+    PersoonlijkeBenaderingNalatenC: 'Persoonlijke_benadering_Nalaten__c',
+    PersoonlijkeBenaderingVMFenBedrijvenC: 'Persoonlijke_benadering_VMF_en_bedrijven__c',
+    NietBedankenC: 'Niet_bedanken__c',
+    EinddatumAVGbewaartermijnC: 'Einddatum_AVG_bewaartermijn__c'
   },
 
   converters: {

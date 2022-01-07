@@ -11,13 +11,15 @@ require './uploads/contacts'
 require './uploads/campaigns'
 require './uploads/campaignmembers'
 require './uploads/agreements'
+require './uploads/accounts'
 
 UPLOADS = [
   PAYMENT_INFO,
   CONTACT_INFO,
   CAMPAIGN_INFO,
   CAMPAIGNMEMBER_INFO,
-  AGREEMENT_INFO
+  AGREEMENT_INFO,
+  ACCOUNT_INFO
 ].freeze
 
 SQL_LOGIN_INFO = {
@@ -52,7 +54,7 @@ def cleanup(sqlserver, exception)
 end
 
 def timestr
-  Time.now.getlocal('+02:00').strftime('%d-%m-%Y %H:%M')
+  Time.now.getlocal('+01:00').strftime('%d-%m-%Y %H:%M') # local time (should add an extra hour for summer time!)
 end
 
 def execute
