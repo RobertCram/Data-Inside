@@ -26,11 +26,15 @@ RUN gem install solargraph ruby-debug-ide
 
 RUN gem install bundler:2.2.10
 
+ARG BRANCH=production
+
+ARG GITHUBTOKEN
+
 # Invalidates the cache
-ADD https://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:x-oauth-basic@api.github.com/repos/RobertCram/Data-Inside/git/refs/heads/production version.json
+RUN curl -o version.json https://${GITHUBTOKEN}:x-oauth-basic@api.github.com/repos/RobertCram/Data-Inside/git/refs/heads/${BRANCH}
 
 # Clones latest version of the production branch
-RUN mkdir /workspaces && cd /workspaces && git clone --branch production https://RobertCram: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@github.com/RobertCram/Data-Inside.git DataInside
+RUN mkdir /workspaces && cd /workspaces && git clone --branch ${BRANCH} https://RobertCram:${GITHUBTOKEN}@github.com/RobertCram/Data-Inside.git DataInside
 
 WORKDIR /workspaces/DataInside
 
