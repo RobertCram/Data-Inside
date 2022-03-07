@@ -1,3 +1,19 @@
+
+# Use intermediate stage to hide secret tokens from Docker history.
+FROM ruby:2.6.6 as builder 
+
+ARG BRANCH=production
+
+ARG GITHUBTOKEN
+
+# Invalidates the cache when the branch is changed
+RUN curl -o version.json https://${GITHUBTOKEN}:x-oauth-basic@api.github.com/repos/RobertCram/Data-Inside/git/refs/heads/${BRANCH}
+
+
+# Clones latest version of the production branch
+RUN mkdir /workspaces && cd /workspaces && git clone --branch ${BRANCH} https://RobertCram:${GITHUBTOKEN}@github.com/RobertCram/Data-Inside.git DataInside
+
+
 FROM ruby:2.6.6
 
 # Avoid warnings by switching to noninteractive
@@ -26,15 +42,9 @@ RUN gem install solargraph ruby-debug-ide
 
 RUN gem install bundler:2.2.10
 
-ARG BRANCH=production
+RUN mkdir /workspaces
 
-ARG GITHUBTOKEN
-
-# Invalidates the cache
-RUN curl -o version.json https://${GITHUBTOKEN}:x-oauth-basic@api.github.com/repos/RobertCram/Data-Inside/git/refs/heads/${BRANCH}
-
-# Clones latest version of the production branch
-RUN mkdir /workspaces && cd /workspaces && git clone --branch ${BRANCH} https://RobertCram:${GITHUBTOKEN}@github.com/RobertCram/Data-Inside.git DataInside
+COPY --from=builder /workspaces /workspaces
 
 WORKDIR /workspaces/DataInside
 
