@@ -7,7 +7,7 @@ To make it easy to revert to a previous release, docker images are made and stor
 
 ```bash
 cd .devcontainer
-docker build --build-arg GITHUBTOKEN -t <username/repository name>:tag .
+docker build --build-arg GITHUBTOKEN --build-arg BUSTCACHE="$(date)" -t <username/repository name>:tag .
 docker push <username/repository name>:tag
 ```
 
@@ -25,7 +25,7 @@ Sometimes it is more convenient to have a docker image in a local file:
 
 ```bash
 cd .devcontainer
-docker build --build-arg GITHUBTOKEN -t <image name> .
+docker build --build-arg GITHUBTOKEN --build-arg BUSTCACHE="$(date)" -t <image name> .
 docker save -o <filename> <imagename>
 ```
 
