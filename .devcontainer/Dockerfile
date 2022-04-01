@@ -1,6 +1,6 @@
 
 # Use intermediate stage to hide secret tokens from Docker history.
-FROM --platform=linux/amd64 mrnonz/alpine-git-curl as builder 
+FROM mrnonz/alpine-git-curl as builder 
 
 ARG BRANCH=production
 
