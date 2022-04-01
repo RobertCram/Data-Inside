@@ -42,7 +42,8 @@ CONTACT_INFO = {
     PersoonlijkeBenaderingVMFenBedrijvenC: 'Persoonlijke_benadering_VMF_en_bedrijven__c',
     NietBedankenC: 'Niet_bedanken__c',
     EinddatumAVGbewaartermijnC: 'Einddatum_AVG_bewaartermijn__c',
-    Abonnee_kwartaalmagazine__c: 'Abonnee_kwartaalmagazine__c'
+    Abonnee_kwartaalmagazine__c: 'Abonnee_kwartaalmagazine__c',
+    PeriodiekeSchenkingsovereenkomstC: 'Notariele_schenker__c'
   },
 
   converters: {
