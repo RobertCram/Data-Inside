@@ -1,13 +1,18 @@
 
 # Use intermediate stage to hide secret tokens from Docker history.
-FROM --platform=linux/amd64 mrnonz/alpine-git-curl as builder 
+FROM mrnonz/alpine-git-curl as builder 
 
 ARG BRANCH=production
 
 ARG GITHUBTOKEN
 
-# Invalidates the cache when the branch is changed
-RUN curl -o version.json https://${GITHUBTOKEN}:x-oauth-basic@api.github.com/repos/RobertCram/Data-Inside/git/refs/heads/${BRANCH}
+
+# Leads to Docker error ''invalid not-modified ETag': https://github.com/moby/buildkit/issues/2420
+# ADD https://${GITHUBTOKEN}:x-oauth-basic@api.github.com/repos/RobertCram/Data-Inside/git/refs/heads/$BRANCH version.json
+
+# Workaround to be able to invalidate the cache manually when branch changes
+ARG BUSTCACHE
+RUN echo "${BUSTCACHE}" > /dev/null
 
 # Clones latest version of the production branch
 RUN mkdir /workspaces && cd /workspaces && git clone --branch ${BRANCH} https://RobertCram:${GITHUBTOKEN}@github.com/RobertCram/Data-Inside.git DataInside
