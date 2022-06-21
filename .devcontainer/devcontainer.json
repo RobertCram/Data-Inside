@@ -20,8 +20,8 @@
 		"castwide.solargraph",
 		"rebornix.ruby",
 		"eamodio.gitlens",
-		"octref.vetur",
-		"ms-mssql.mssql"
+		"ms-mssql.mssql",
+		"GitHub.vscode-pull-request-github"
 	],
 	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
