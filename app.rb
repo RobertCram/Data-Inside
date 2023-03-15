@@ -5,11 +5,20 @@ ENV['CHAMBER_KEY'] = ENV['CHAMBER_KEY'].gsub '_', "\n" if ENV.key? 'CHAMBER_KEY'
 require 'chamber'
 require 'sinatra'
 require './scheduler'
+require './notifier'
+
+Notifier.url(ENV['NOTIFICATION_URL'] || Chamber['development'][:notification_url])
 
 $info = {
   started: 'not started yet',
   stopped: '',
   error: ''
+}
+
+$christal_info = {
+  started: 'not started yet',
+  stopped: '',
+  error: '' 
 }
 
 def running_rufus

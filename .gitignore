@@ -4,3 +4,4 @@
 .chamber*.pem
 .chamber*.enc.pass
 !.chamber*.pub.pem
+.DS_Store

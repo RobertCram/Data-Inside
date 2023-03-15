@@ -41,7 +41,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 RUN apt-get install -y freetds-dev 
 
-RUN gem install solargraph ruby-debug-ide
+# RUN gem install solargraph ruby-debug-ide
 
 RUN gem install bundler:2.2.10
 

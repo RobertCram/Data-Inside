@@ -1,4 +1,12 @@
-<h1>Data Inside Server</h1>
+<h1>WG File Server</h1>
+<br>
+<h2>Christal</h2>
+<div>Last execution started: <%= $christal_info[:started] if $info %></div><br/>
+<div>Last execution stopped: <%= $christal_info[:stopped] if $info %></div><br/>
+<div>Last execution error: <%= $christal_info[:error] if $info %></div><br/>
+<br>
+<h2>Data Inside</h2>
 <div>Last execution started: <%= $info[:started] if $info %></div><br/>
 <div>Last execution stopped: <%= $info[:stopped] if $info %></div><br/>
 <div>Last execution error: <%= $info[:error] if $info %></div><br/>
+

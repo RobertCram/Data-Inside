@@ -2,7 +2,7 @@
 
 require 'benchmark'
 require 'tiny_tds'
-require './mailer'
+require './notifier'
 require './salesforce'
 require './sqlserver'
 require './uploader'
@@ -46,10 +46,9 @@ end
 def cleanup(sqlserver, exception)
   $info[:stopped] = timestr
   $info[:error] = exception.message
-  to = 'robert.cram@gmail.com'
   subject = "[DI Server] #{exception}"
   body = "Het uploaden van de gegevens is mislukt.\n\n#{exception.inspect}"
-  Mailer.sendmail(to, subject, body)
+  Notifier.sendmail(subject, body)
   sqlserver.cleartables(UPLOADS.map { |info| info[:sql_tablename] })
 end
 

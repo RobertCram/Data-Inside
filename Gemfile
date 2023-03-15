@@ -9,6 +9,8 @@ gem 'restforce'
 gem 'rufus-scheduler'
 gem 'sinatra'
 gem 'tiny_tds'
+gem 'net-sftp'
+
 
 group :development, :test do
   gem 'solargraph'
