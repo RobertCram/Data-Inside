@@ -5,6 +5,12 @@ To make it easy to revert to a previous release, docker images are made and stor
 - make sure the branch "production" is up to date.
 - reopen locally
 
+## Caveat!
+- image should be build for linux/amd64 platform to run it on Linode.
+- doesn't seem to build correctly on the M1 (not even with --platform linux/amd64)
+<br>
+<br>
+
 ```bash
 cd .devcontainer
 docker build --build-arg GITHUBTOKEN --build-arg BUSTCACHE="$(date)" -t <username/repository name>:tag .
